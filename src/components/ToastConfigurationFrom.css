@@ -1,0 +1,44 @@
+.form {
+    left: 0px;
+    top: 0px;
+    height: 250px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+}
+
+.form-configuration {
+    width: 300px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+input {
+    height: 30px;
+    outline: none;
+    background: transparent;
+}
+
+select {
+    height: 30px;
+    outline: none;
+}
+
+.form-btn {
+    border: none;
+    outline: none;
+    height: 30px;
+    background: rgb(38, 68, 38);
+    margin: 7px 0;
+}
+
+.form-btn:hover {
+    cursor: pointer;
+}
