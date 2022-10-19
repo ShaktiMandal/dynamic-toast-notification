@@ -19,19 +19,10 @@ interface IToastInfo {
 function App() {
   const [toastData, setToastData] = useState<Array<IToastInfo>>([]);
 
-  const onCloseToast = (toastId: string) => {
+  const onCloseToast = (event:React.FormEvent<HTMLElement>, toastId: string) => {
+    event.preventDefault();
     const filteredToast = toastData.filter(toast => toast.toastId !== toastId);
     setToastData([...filteredToast]);
-  };
-
-  const autoToastClose = (toastId: string) => {
-    console.log("auto close called");
-    setTimeout(() => {
-
-      console.log("auto close timeout");
-      const filteredToast = toastData.filter(toast => toast.toastId !== toastId);
-      setToastData([...filteredToast]);
-    }, 100);
   };
 
   const uniqueId = () => {
@@ -56,12 +47,24 @@ function App() {
       },
     ]);
   };
+
+const getPositionClass  = (toasts:IToastInfo[]) => {
+    const position = toasts[0].position?.split('-');
+    return `${position[0]}${position[1]}`
+}
+
+const className = toastData.length ? getPositionClass(toastData) : null;  
+
   return (
     <div className="App">
       <ToastConfigurationFrom onUpdateToastConfiguration={setConfiguration} />
-      {toastData && toastData.length > 0 && (
-        <Toast toasts={toastData} onToastClose={ onCloseToast } autoClose={ autoToastClose }/>
-      )}
+      <div className={`container ${className}`}> 
+        {
+          toastData.map( (toast, index)=> {
+            return <Toast message={ toast.message } toastId={ toast.toastId } onToastClose={ onCloseToast } />
+          })
+        }
+      </div>
     </div>
   );
 }

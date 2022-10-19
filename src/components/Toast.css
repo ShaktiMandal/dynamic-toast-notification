@@ -10,15 +10,7 @@
     border-radius: 5px;
 }
 
-.container {
-    padding: 3px;
-    gap: 3px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    position: absolute;
-}
+
 
 .toast-action span {
     cursor:pointer;
@@ -34,22 +26,6 @@
     border: 1px solid rgb(41, 38, 38);
 }
 
-.topleft{
-    left: 0;
-    top: 0;
-}
-
-.topright{
-    right: 0;
-    top: 0;
-}
-
-.bottomleft{
-    left: 0;
-    bottom: 0;
-}
-
-.bottomright{
-    right: 0;
-    bottom: 0;
+.displayToastClass {
+    display: none;
 }
