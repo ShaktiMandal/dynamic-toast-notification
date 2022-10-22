@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import './Toast.css';
 import { iconOption } from './utils';
 
-
 interface IToast {
     message: string,
     toastId: string,
@@ -12,6 +11,7 @@ interface IToast {
 
 const Toast: React.FC<IToast> = ({message, toastId, icon, onToastClose}) => {
 
+  const selectedIcon = iconOption.find( (option, index) => option.key === icon );
 
   (() => {
     setTimeout(() => {
@@ -20,8 +20,7 @@ const Toast: React.FC<IToast> = ({message, toastId, icon, onToastClose}) => {
         element.style.display = "none";
     }, 5000);
   })();
-  
-  const selectedIcon = iconOption.find( (option, index) => option.key === icon );
+
   return (
         <div id={toastId} className={`toast`}>
           <div className="toast-icon">
