@@ -42,3 +42,31 @@ select {
 .form-btn:hover {
     cursor: pointer;
 }
+
+.list-icons {
+    list-style: none;
+    border: 1px solid lightgray;
+    position: relative;
+    height: 30px;
+    width: 100%;
+}
+
+.list-icons li{
+    width: 100%;
+    border: 1px solid green;
+    padding: 5px;
+    margin: 2px;
+    position: absolute;
+    top: 25px;
+    left: 0;
+}
+
+.warning-icon{
+
+    width: 0; 
+    height: 0; 
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid green;
+    
+    border-left: 10px solid transparent;
+}

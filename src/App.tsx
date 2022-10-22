@@ -3,6 +3,7 @@ import "./App.css";
 import Toast from "./components/Toast";
 import ToastConfigurationFrom from "./components/ToastConfigurationForm";
 
+
 interface IConfigData {
   title: string;
   position: string;
@@ -12,7 +13,7 @@ interface IConfigData {
 interface IToastInfo {
   toastId: string,
   message: string;
-  toastType: string;
+  icon: string;
   position: string;
 }
 
@@ -21,6 +22,7 @@ function App() {
 
   const onCloseToast = (event:React.FormEvent<HTMLElement>, toastId: string) => {
     event.preventDefault();
+    
     const filteredToast = toastData.filter(toast => toast.toastId !== toastId);
     setToastData([...filteredToast]);
   };
@@ -42,7 +44,7 @@ function App() {
       {
         toastId: uniqueId(),
         message: title,
-        toastType: icon,
+        icon,
         position,
       },
     ]);
@@ -61,7 +63,7 @@ const className = toastData.length ? getPositionClass(toastData) : null;
       <div className={`container ${className}`}> 
         {
           toastData.map( (toast, index)=> {
-            return <Toast message={ toast.message } toastId={ toast.toastId } onToastClose={ onCloseToast } />
+            return <Toast message={ toast.message } toastId={ toast.toastId } icon ={toast.icon} onToastClose={ onCloseToast } />
           })
         }
       </div>

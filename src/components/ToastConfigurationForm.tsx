@@ -1,82 +1,87 @@
 import React, { useEffect, useState } from "react";
 import "./ToastConfigurationFrom.css";
+import { iconOption } from './utils'
 
 interface IConfigData {
-  title: string, 
-  position: string, 
+  title: string;
+  position: string;
   icon: string;
 }
 
-interface IConfiguration  {
-  onUpdateToastConfiguration: (event: React.FormEvent<HTMLElement>, data: IConfigData) => void;
+interface IConfiguration {
+  onUpdateToastConfiguration: (
+    event: React.FormEvent<HTMLElement>,
+    data: IConfigData
+  ) => void;
 }
 
 const ToastConfigurationFrom: React.FC<IConfiguration> = ({
-  onUpdateToastConfiguration
+  onUpdateToastConfiguration,
 }) => {
 
   const configData: IConfigData = {
-      title: "",
-      position: "",
-      icon: ""
-  }
-  const [title, setTitle] = useState<string>("");
-  const [selectedPosIndex, setSelectedPos] = useState<string>("");
-  const [selectedMsgTypeIndex, SetMsgType] = useState<string>("");
+    title: "",
+    position: "",
+    icon: "",
+  };
 
-  useEffect(()=> {
+  const [title, setTitle] = useState<string>("");
+  const [selectedPosition, setPosition] = useState<string>("top-left");
+  const [selectedIcon, setIcon] = useState<string>("burger");
+
+  useEffect(() => {
     configData.title = title;
-    configData.position = selectedPosIndex,
-    configData.icon = selectedMsgTypeIndex
-  },[title, selectedMsgTypeIndex, selectedPosIndex])
+    configData.position = selectedPosition;
+    configData.icon = selectedIcon;
+  }, [title, selectedIcon, selectedPosition]);
 
   const onSetTitle = (event: React.FormEvent<HTMLElement>): void => {
-    if (event.target) {     
+    if (event.target) {
       setTitle(event.target.value);
     }
   };
 
   const onChangePosition = (event: React.FormEvent<HTMLElement>): void => {
-    if (event.target) {     
+    if (event.target) {
       const options = event.target.options;
-      setSelectedPos(options[event.target.selectedIndex]?.value);
+      setPosition(options[event.target.selectedIndex]?.value);
     }
   };
 
   const onChangeIcon = (event: React.FormEvent<HTMLElement>): void => {
-    if (event.target) {     
+    if (event.target) {
       const options = event.target.options;
-      SetMsgType(options[event.target.selectedIndex]?.value);
+      setIcon(options[event.target.selectedIndex]?.value);
     }
   };
 
   return (
     <div className="form">
       <form
-        onSubmit= { event => onUpdateToastConfiguration(event, configData) }
+        onSubmit={(event) => onUpdateToastConfiguration(event, configData)}
         className="form-configuration">
         <label htmlFor="title">Ttile </label>
-        <input
-        type="text"
-        className="title"
-        id="title"
-        onInput={ onSetTitle }
-        />
+        <input type="text" className="title" id="title" onInput={onSetTitle} />
 
         <label htmlFor="position">Position </label>
-        <select name="position" id="position" onChange={ onChangePosition }>
+        <select name="position" id="position" onChange={onChangePosition}>
           <option value="top-left">Top Left</option>
           <option value="top-right">Top Right</option>
           <option value="bottom-left">Bottom Left</option>
           <option value="bottom-right">Bottom Right</option>
         </select>
-       
+
         <label htmlFor="icons"> Icon </label>
-        <select name="icons" id="icons" onChange={ onChangeIcon }>
-          <option value="warning">Warning</option>
-          <option value="error">Error</option>
-          <option value="info">Info</option>
-          <option value="success">Success</option>
+        <select name="icons" id="icons" onChange={onChangeIcon}>
+          {iconOption.map((icon, index) => {
+            return (
+              <option value={icon.key} key={index.toString()}>
+                <React.Fragment>
+                  {icon.value} - {icon.key}
+                </React.Fragment>
+              </option>
+            );
+          })}
         </select>
         <input type="submit" value="Submit" className="form-btn" />
       </form>
