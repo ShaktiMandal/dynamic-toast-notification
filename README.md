@@ -8,16 +8,16 @@ Demo:
 
 Tech stack - React with typescript, vite.
 
-Requirements -
-[] - User can change the toast configuration using configuration form
-[] - User can generate multiple toast components at the same time (Position will be fixed as configured for the first toast).
-[] - Toast can be closed by the user using the close button on the toast.
-[] - Toast will automatically disappear after 5ms.
+Requirements -  
+    [] - User can change the toast configuration using configuration form.  
+    [] - User can generate multiple toast components at the same time (Position will be fixed as configured for the first toast).  
+    [] - Toast can be closed by the user using the close button on the toast.  
+    [] - Toast will automatically disappear after 5ms.  
 
-How to run -
-  clone the repo in your local
-  cd dynamic-toast-notification
-  perform npm i
-  Run npm run dev
+How to run -  
+  clone the repo in your local  
+  cd dynamic-toast-notification  
+  perform npm i  
+  Run the command - npm run dev  
 
 
