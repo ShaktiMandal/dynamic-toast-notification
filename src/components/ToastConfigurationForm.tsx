@@ -43,6 +43,7 @@ const ToastConfigurationFrom: React.FC<IConfiguration> = ({
 
   const onChangePosition = (event: React.FormEvent<HTMLElement>): void => {
     if (event.target) {
+      debugger;
       const options = event.target.options;
       setPosition(options[event.target.selectedIndex]?.value);
     }
@@ -55,7 +56,7 @@ const ToastConfigurationFrom: React.FC<IConfiguration> = ({
     }
   };
 
-  const resetForm = () => {
+  const resetForm = (): void => {
     setTitle('');
     setIcon('burger');
     setPosition('top-left');
@@ -73,10 +74,10 @@ const ToastConfigurationFrom: React.FC<IConfiguration> = ({
         onSubmit={ onSubmit }
         className="form-configuration">
         <label htmlFor="title">Ttile </label>
-        <input required type="text" className="title" id="title" value={title} onInput={onSetTitle} />
+        <input required type="text" className="title" id="title" value={ title } onInput={ onSetTitle } />
 
         <label htmlFor="position">Position </label>
-        <select name="position" id="position" value={selectedPosition} onChange={onChangePosition}>
+        <select name="position" id="position" value={ selectedPosition } onChange={ onChangePosition }>
           <option value="top-left">Top Left</option>
           <option value="top-right">Top Right</option>
           <option value="bottom-left">Bottom Left</option>
@@ -84,7 +85,7 @@ const ToastConfigurationFrom: React.FC<IConfiguration> = ({
         </select>
 
         <label htmlFor="icons"> Icon </label>
-        <select name="icons" id="icons" value={selectedIcon} onChange={onChangeIcon}>
+        <select name="icons" id="icons" value={ selectedIcon } onChange={ onChangeIcon }>
           {iconOption.map((icon, index) => {
             return (
               <option value={icon.key} key={index.toString()}>
