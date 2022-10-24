@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./App.css";
+import classNames from "classnames";
 import Toast from "./components/Toast";
 import ToastConfigurationFrom from "./components/ToastConfigurationForm";
 
@@ -60,7 +61,7 @@ const className = toastData.length ? getPositionClass(toastData) : null;
   return (
     <div className="App">
       <ToastConfigurationFrom onUpdateToastConfiguration={setConfiguration} />
-      <div className={`container ${className}`}> 
+      <div className={classNames("container", className)}> 
         {
           toastData.map( (toast, index)=> {
             return <Toast message={ toast.message } toastId={ toast.toastId } icon ={toast.icon} onToastClose={ onCloseToast } />
