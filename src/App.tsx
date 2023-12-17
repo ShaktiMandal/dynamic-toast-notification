@@ -4,7 +4,6 @@ import classNames from "classnames";
 import Toast from "./components/Toast";
 import ToastConfigurationFrom from "./components/ToastConfigurationForm";
 
-
 interface IConfigData {
   title: string;
   position: string;
@@ -12,24 +11,36 @@ interface IConfigData {
 }
 
 interface IToastInfo {
-  toastId: string,
+  toastId: string;
   message: string;
   icon: string;
   position: string;
 }
 
-function App() {
-  const [toastData, setToastData] = useState<Array<IToastInfo>>([]);
+const initialState: IToastInfo = {
+  toastId: "",
+  message: "",
+  icon: "",
+  position: "",
+};
 
-  const onCloseToast = (event:React.FormEvent<HTMLElement>, toastId: string) => {
+function App() {
+  const [toastData, setToastData] = useState<IToastInfo>(initialState);
+
+  const onCloseToast = (
+    event: React.FormEvent<HTMLElement>,
+    toastId: string
+  ) => {
     event.preventDefault();
-    
-    const filteredToast = toastData.filter(toast => toast.toastId !== toastId);
-    setToastData([...filteredToast]);
+
+    // const filteredToast = toastData.filter(
+    //   (toast) => toast.toastId !== toastId
+    // );
+    setToastData(initialState);
   };
 
   const uniqueId = () => {
-    const id = Math.floor( Math.random() * ( 100 - 0 + 1 ) ) + 0;
+    const id = Math.floor(Math.random() * (100 - 0 + 1)) + 0;
     return id.toString();
   };
 
@@ -40,34 +51,44 @@ function App() {
     event.preventDefault();
     const { title, position, icon } = data;
 
-    setToastData([
-      ...toastData,
-      {
-        toastId: uniqueId(),
-        message: title,
-        icon,
-        position,
-      },
-    ]);
+    setToastData({
+      toastId: uniqueId(),
+      message: title,
+      icon,
+      position,
+    });
   };
 
-const getPositionClass  = (toasts:IToastInfo[]) => {
-    const position = toasts[0].position?.split('-');
-    return `${position[0]}${position[1]}`
-}
+  const getPositionClass = (toasts: IToastInfo) => {
+    const position = toasts?.position?.split("-");
+    return `${position[0]}${position[1]}`;
+  };
 
-const className = toastData.length ? getPositionClass(toastData) : null;  
+  const className = toastData.toastId?.length
+    ? getPositionClass(toastData)
+    : null;
 
   return (
     <div className="App">
-
       <ToastConfigurationFrom onUpdateToastConfiguration={setConfiguration} />
-      <div className={classNames("container", className)}> 
-        {
-          toastData.map( (toast, index)=> {
-            return <Toast message={ toast.message } toastId={ toast.toastId } icon ={toast.icon} onToastClose={ onCloseToast } />
-          })
-        }
+      <div className={classNames("container", className)}>
+        <Toast
+          message={toastData.message}
+          toastId={toastData.toastId}
+          icon={toastData.icon}
+          onToastClose={onCloseToast}
+        />
+
+        {/* {toastData.map((toast, index) => {
+          return (
+            <Toast
+              message={toast.message}
+              toastId={toast.toastId}
+              icon={toast.icon}
+              onToastClose={onCloseToast}
+            />
+          );
+        })} */}
       </div>
     </div>
   );
