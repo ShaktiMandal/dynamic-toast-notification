@@ -60,6 +60,7 @@ const className = toastData.length ? getPositionClass(toastData) : null;
 
   return (
     <div className="App">
+
       <ToastConfigurationFrom onUpdateToastConfiguration={setConfiguration} />
       <div className={classNames("container", className)}> 
         {

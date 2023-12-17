@@ -70,6 +70,9 @@ const ToastConfigurationFrom: React.FC<IConfiguration> = ({
 
   return (
     <div className="form">
+      <div className="header-title">
+        <h3>Configurable Notification Toast</h3>
+      </div>
       <form
         onSubmit={ onSubmit }
         className="form-configuration">
